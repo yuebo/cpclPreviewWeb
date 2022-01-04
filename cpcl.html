@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="CPCL2SVG.js"></script>
+	</head>
+	<body>
+		<h1>小票打印预览(CPCL)</h1>
+		
+		<div style="display: flex">
+		   <div style="flex:1">
+			<textarea id="cpcl" cols="40" rows="20">! 0 200 200 1100 1
+PAGE-HEIGHT 1100
+PAGE-WIDTH 580
+
+LINE 0 80 558 80 2
+LINE 0 280 558 280 2
+LINE 0 480 558 480 2
+LINE 0 780 558 780 2
+LINE 0 980 558 980 2
+
+TEXT 2 0 10 180 类型:
+SETBOLD 1
+TEXT 2 0 60 180 [type]
+SETBOLD 1
+TEXT 3 1 160 180 [typeValue]
+SETBOLD 0
+TEXT 2 0 290 180 线路:
+TEXT 3 0 340 150 发
+TEXT 3 0 340 210 到
+SETBOLD 1
+TEXT 2 0 375 150 [lastSite]
+TEXT 2 0 375 210 [nextSite]
+
+SETBOLD 0
+TEXT 2 0 10 330 车牌号:
+TEXT 2 0 10 430 总  重:
+TEXT 2 0 290 330 货重:
+TEXT 2 0 390 430  车重:
+SETBOLD 1
+TEXT 2 0 100 330 [carNum]
+TEXT 2 0 100 430 [allWeigh]
+TEXT 2 0 360 330 [goodsWeigh]
+TEXT 2 0 460 430 [carWeigh]
+
+SETBOLD 0
+TEXT 2 0 10 530 称重/打印中心:
+TEXT 2 0 10 575 称重/打印人员:
+TEXT 2 0 10 630 称重时间:
+TEXT 2 0 10 685 打印时间:
+SETBOLD 1
+TEXT 2 0 200 530 [weighSite]
+TEXT 2 0 200 575 [weighPerson]
+TEXT 2 0 120 630 [weighDate]
+TEXT 2 0 120 685 [printDate]
+
+SETBOLD 0
+BOX 5 850 550 960 2
+TEXT 2 0 10 870 注意事项:
+SETBOLD 2
+TEXT 3 1 10 930 [weighTips]
+
+SETBOLD 0
+TEXT 2 0 10 1060 装卸人员:
+TEXT 2 0 290 1060 中心监督人员:
+
+BARCODE 128 1 1 50 0 10 123456
+
+PRINT</textarea><br><button onclick="generate()">预览</button>
+			</div>
+			<div style="flex:3">
+				<div id="svgContainer"></div>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			function generate(){
+				document.getElementById("svgContainer").innerHTML = "";
+				document.getElementById("svgContainer").appendChild(CPCL2SVG.render(document.getElementById('cpcl').value));
+
+			}
+			generate()
+		</script>
+	</body>
+</html>
